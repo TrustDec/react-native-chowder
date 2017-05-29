@@ -13,60 +13,45 @@ import {
   Image
 } from 'react-native';
 import { TabNavigator } from 'react-navigation';
-export  class Home extends Component {
-  static navigationOptions = {
-    tabBarIcon: ({ tintColor }) => (
-      <Image
-        source={{uri:'http://www.marksmile.com.cn/img/share/ymfw.jpg'}}
-        style={[styles.icon, {tintColor: tintColor}]}
-      />
-    ),
-  }
-  render() {
-    return (
-      <Button
-        onPress={() => this.props.navigation.navigate('Notifications')}
-        title=""
-      />
-    );
-  }
-}
-export  class My extends Component {
-  static navigationOptions = {
-    tabBarIcon: ({ tintColor }) => (
-      <Image
-        source={{uri:'http://www.marksmile.com.cn/img/share/ymfw.jpg'}}
-        style={[styles.icon, {tintColor: tintColor}]}
-      />
-    ),
-  }
-  render() {
-    return (
-      <Button
-        onPress={() => this.props.navigation.navigate('Notifications')}
-        title=""
-      />
-    );
-  }
-}
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Home from './page/home';
+import Mess from './page/mess';
+import User from './page/user';
 export default Main = TabNavigator({
   Home: {
     screen: Home,
+    navigationOptions: ({navigation})=>TabOptions('Home','home',navigation)
   },
-  My: {
-    screen: My,
+  Mess: {
+    screen: Mess,
+    navigationOptions: ({navigation})=>TabOptions('Mess','message-text',navigation)
+  },
+  User: {
+    screen: User,
+    navigationOptions: ({navigation})=>TabOptions('User','account-settings-variant',navigation)
   }
 }, {
   tabBarOptions: {
-    activeTintColor: '#e91e63',
+    activeTintColor: '#188eee',
+    lazy:true,
+    style: {
+            height:49,
+            backgroundColor:'white'
+        },
   },
   tabBarPosition:'bottom'
 });
-const styles = StyleSheet.create({
-  icon: {
-      width: 26,
-      height: 26,
-    },
-});
+const TabOptions = (tabBarTitle,normalImage,navigation) => {
+  let {state,goBack} = navigation;
+  const tabBarLabel = tabBarTitle;
+  const tabBarIcon = ({tintColor})=>{
+    return(
+      <Icon name={normalImage} size={30} color={tintColor} />
+    )
+  };
+  const tabBarVisible = true;
+  return {tabBarLabel,tabBarIcon,tabBarVisible}
+}
+
 
 

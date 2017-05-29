@@ -1,4 +1,4 @@
-import { AppRegistry } from 'react-native';
+import { AppRegistry,StatusBar } from 'react-native';
 import Main from './App';
 if (!__DEV__) {
     global.console = {
@@ -12,4 +12,6 @@ if (!__DEV__) {
         },
     };
 }
+console.log(global);
+StatusBar.setBarStyle('light-content',true);
 AppRegistry.registerComponent('Chowder', () => Main);
